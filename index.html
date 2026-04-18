@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тёплая Пекарня</title>
+  <!-- Подключаем аккуратный шрифт с Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <!-- Font Awesome для иконок -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #fef9f2;
+      color: #3e2c1b;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Шапка */
+    header {
+      background-color: #fff7ed;
+      padding: 1.5rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      border-bottom: 1px solid #f0d5b0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo h1 {
+      font-size: 2.2rem;
+      color: #9e5e3a;
+      letter-spacing: 1px;
+    }
+
+    .logo i {
+      color: #d49b6a;
+      margin-right: 8px;
+    }
+
+    .logo p {
+      font-size: 0.9rem;
+      color: #7f5a3a;
+      margin-top: -5px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #5a3f2b;
+      transition: color 0.2s;
+      font-size: 1.1rem;
+    }
+
+    nav a:hover {
+      color: #b46f40;
+    }
+
+    /* Hero секция */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.2)), url('https://images.pexels.com/photos/2133993/pexels-photo-2133993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+      border-radius: 0 0 40px 40px;
+    }
+
+    .hero-content {
+      background-color: rgba(60, 40, 25, 0.55);
+      padding: 2.5rem 3rem;
+      border-radius: 30px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero h2 {
+      font-size: 3.2rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #d49b6a;
+      color: #2d1f12;
+      padding: 12px 30px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+      border: 1px solid #e6b88e;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+      background-color: #b87e4e;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Секции */
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: #7a4e2d;
+      position: relative;
+    }
+
+    .section-title:after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #d49b6a;
+      margin: 15px auto 0;
+      border-radius: 5px;
+    }
+
+    /* О нас */
+    .about-grid {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .about-text p {
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+    }
+
+    .about-image {
+      flex: 1;
+      min-width: 280px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 20px 20px 0 #f3e1cf;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Продукция */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem 1.5rem 1.8rem;
+      text-align: center;
+      box-shadow: 0 12px 24px -8px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+      border: 1px solid #fae7d6;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .product-icon {
+      font-size: 3.8rem;
+      color: #b87e4e;
+      margin-bottom: 1rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.7rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .product-card p {
+      color: #6b4f36;
+    }
+
+    /* Контакты */
+    .contacts-block {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: center;
+      background: #fff4e9;
+      padding: 2.5rem 2rem;
+      border-radius: 40px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.2rem;
+    }
+
+    .contact-item i {
+      font-size: 2rem;
+      color: #9e5e3a;
+      width: 40px;
+      text-align: center;
+    }
+
+    /* Подвал */
+    footer {
+      background: #2d1f12;
+      color: #ecd9c2;
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    footer i {
+      color: #d49b6a;
+      margin: 0 5px;
+    }
+
+    /* Адаптация */
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 15px;
+      }
+      nav ul {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero h2 {
+        font-size: 2.3rem;
+      }
+      .hero-content {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Прокрутка якорей плавная */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Шапка -->
+<header>
+  <div class="container header-inner">
+    <div class="logo">
+      <h1><i class="fas fa-bread-slice"></i> Тёплая Пекарня</h1>
+      <p>с любовью с 1995 года</p>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#products">Выпечка</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section id="home">
+    <div class="hero">
+      <div class="hero-content">
+        <h2>Свежая выпечка каждый день</h2>
+        <p>Аромат хлеба, который согревает душу</p>
+        <a href="#products" class="btn"><i class="fas fa-cookie-bite"></i> Смотреть меню</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- О нас -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">Наша история</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p><i class="fas fa-heart" style="color: #b87e4e; margin-right: 8px;"></i> <strong>Тёплая Пекарня</strong> — это семейное дело, где каждый батон и булочка создаются вручную с душой. Мы используем только натуральные ингредиенты: муку высшего сорта, живые дрожжи и фермерское масло.</p>
+          <p>Каждое утро мы начинаем в 4 часа, чтобы к вашему завтраку на прилавке лежал хрустящий хлеб. Наши пекари — мастера с многолетним опытом, которые знают секреты идеальной корочки.</p>
+          <p>Приходите к нам за уютом, ароматом корицы и традиционным вкусом.</p>
+        </div>
+        <div class="about-image">
+          <!-- Изображение с Unsplash (бесплатное использование) — интерьер пекарни -->
+          <img src="https://images.pexels.com/photos/3915857/pexels-photo-3915857.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Интерьер пекарни">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Продукция -->
+  <section id="products" style="background-color: #fffbf7;">
+    <div class="container">
+      <h2 class="section-title">Наша выпечка</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-icon"><i class="fas fa-bread-slice"></i></div>
+          <h3>Хлеб «Деревенский»</h3>
+          <p>На закваске, с хрустящей корочкой и нежным мякишем.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon"><i class="fas fa-croissant"></i></div>
+          <h3>Круассаны</h3>
+          <p>Сливочные, слоёные, с начинкой или без — тают во рту.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon"><i class="fas fa-cake"></i></div>
+          <h3>Пирожные</h3>
+          <p>Эклеры, корзиночки и нежные муссовые десерты.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon"><i class="fas fa-pie"></i></div>
+          <h3>Пироги</h3>
+          <p>С ягодами, яблоками, творогом — как у бабушки.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Где нас найти</h2>
+      <div class="contacts-block">
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>ул. Пшеничная, 12, Москва</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Ежедневно 8:00 – 21:00</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone-alt"></i>
+          <span>+7 (999) 123-45-67</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>hello@warmbakery.ru</span>
+        </div>
+      </div>
+      <!-- Мини-карта (декоративная) -->
+      <div style="margin-top: 2rem; border-radius: 30px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.876876519628!2d37.6184233159314!3d55.75321598055323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5a6b6b6b6b%3A0x5b5b5b5b5b5b5b5b!2z0JzQvtGB0LrQvtCy0YHQutC40Lkg0JrRgNC10LzQu9GM!5e0!3m2!1sru!2sru!4v1616161616161" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Подвал -->
+<footer>
+  <div class="container">
+    <p><i class="fas fa-bread-slice"></i> Тёплая Пекарня — печём с душой <i class="fas fa-heart"></i></p>
+    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">© 2025 Все права защищены. Свежесть гарантирована.</p>
+  </div>
+</footer>
+
+</body>
+</html>
