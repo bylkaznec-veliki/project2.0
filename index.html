@@ -15,13 +15,24 @@
 
     body {
       font-family: 'Source Sans Pro', sans-serif;
-      background: #1c1c1c; /* чуть светлее, чем #0f0f0f */
+      background: #1c1c1c;
       color: #b5b5b5;
       line-height: 1.5;
       position: relative;
     }
 
-    /* Повсюду очень прозрачный текст "вы тоже это видите?" */
+    /* Анимация появления */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .ghost-text {
       position: fixed;
       bottom: 15px;
@@ -35,7 +46,6 @@
       white-space: nowrap;
     }
 
-    /* Дополнительные вкрапления */
     .easter-egg {
       font-size: 10px;
       opacity: 0.07;
@@ -59,7 +69,6 @@
       padding: 0 20px;
     }
 
-    /* Шапка */
     header {
       background: #0e0e0e;
       padding: 1.5rem 0;
@@ -109,7 +118,6 @@
       color: #6a6a6a;
     }
 
-    /* Hero */
     .hero {
       background: linear-gradient(rgba(10,10,10,0.8), rgba(5,5,5,0.9)), url('https://images.pexels.com/photos/1291712/pexels-photo-1291712.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
       min-height: 450px;
@@ -130,6 +138,7 @@
       backdrop-filter: blur(2px);
       border: 1px solid #3a3a3a;
       position: relative;
+      animation: fadeIn 1.2s ease-out;
     }
 
     .hero h2 {
@@ -187,7 +196,6 @@
       margin: 15px auto 0;
     }
 
-    /* О нас */
     .about-grid {
       display: flex;
       align-items: center;
@@ -206,32 +214,24 @@
       color: #ababab;
     }
 
-    /* Квадрат вместо фото */
-    .about-square {
+    /* Стили для изображения вместо квадрата */
+    .about-image {
       flex: 1;
       min-width: 280px;
       height: 280px;
-      background: #151515;
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       box-shadow: 15px 15px 0 #1e1e1e;
       border: 1px solid #2c2c2c;
+      overflow: hidden;
     }
 
-    .about-square p {
-      font-size: 2rem;
-      font-weight: 300;
-      color: #8a8a8a;
-      text-transform: uppercase;
-      letter-spacing: 6px;
-      opacity: 0.7;
-      text-align: center;
-      padding: 20px;
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    /* Продукция — 5 карточек */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -270,7 +270,6 @@
       font-size: 0.95rem;
     }
 
-    /* Уменьшенный блюр */
     .censored-light {
       display: inline-block;
       background: #2f2f2f;
@@ -292,7 +291,6 @@
       display: inline-block;
     }
 
-    /* Контакты */
     .contacts-block {
       display: flex;
       flex-wrap: wrap;
@@ -319,7 +317,6 @@
       text-align: center;
     }
 
-    /* Подвал */
     footer {
       background: #080808;
       color: #7a7a7a;
@@ -335,6 +332,7 @@
       margin: 0 5px;
     }
 
+    /* Первый брейкпоинт (уже был) */
     @media (max-width: 700px) {
       .header-inner {
         flex-direction: column;
@@ -348,6 +346,50 @@
       .hero h2 {
         font-size: 2rem;
       }
+      .about-image {
+        box-shadow: 8px 8px 0 #1e1e1e;
+      }
+    }
+
+    /* Второй брейкпоинт для маленьких экранов */
+    @media (max-width: 480px) {
+      .hero-content {
+        padding: 1.5rem 1.2rem;
+        width: 90%;
+      }
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+      }
+      .about-grid {
+        gap: 1.5rem;
+      }
+      .about-image {
+        height: 240px;
+        box-shadow: 6px 6px 0 #1e1e1e;
+      }
+      .product-card h3 {
+        font-size: 1.4rem;
+      }
+      .contacts-block {
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+      }
+      .contact-item {
+        font-size: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+      .btn {
+        padding: 8px 20px;
+      }
     }
 
     html {
@@ -357,9 +399,7 @@
 </head>
 <body>
 
-<!-- Маленький прозрачный текст по углам и в разных местах -->
 <div class="ghost-text">*вы тоже это видите?*</div>
-<!-- Дополнительные вкрапления будут добавлены в разметке через span.easter-egg -->
 
 <header>
   <div class="container header-inner">
@@ -398,9 +438,9 @@
           <p>Мы используем только то, что приносит океан. Вода — из Тихого, мука — из подвалов. Наши рецепты никогда не записывались, они передаются шёпотом.</p>
           <p>Адрес: Тихий океан, координаты 0°N 160°W. Если вы услышите запах свежей выпечки посреди воды — вы почти у цели. <span class="easter-egg">*вы тоже это видите?*</span></p>
         </div>
-        <!-- Квадрат с текстом "ЕЁ НИКОГДА НЕ БЫЛО" -->
-        <div class="about-square">
-          <p>ЕЁ НИКОГДА НЕ БЫЛО</p>
+        <!-- Вместо квадрата — изображение с атрибутом alt -->
+        <div class="about-image">
+          <img src="https://avatanplus.com/files/resources/original/5755cf4f0939b1552731ccbe.png" alt="Пекарня Весёлого Роджера — атмосферное изображение">
         </div>
       </div>
     </div>
@@ -410,31 +450,26 @@
     <div class="container">
       <h2 class="section-title">Наша выпечка (5 позиций) <span class="easter-egg">*вы тоже это видите?*</span></h2>
       <div class="products-grid">
-        <!-- 1. Хлеб серый -->
         <div class="product-card">
           <div class="product-icon"><i class="fas fa-bread-slice"></i></div>
           <h3>Хлеб «████»</h3>
           <p>Тёмный, плотный, с коркой, которая трескается, как старый асфальт.</p>
         </div>
-        <!-- 2. Булочка с сосиской (частично замазано) -->
         <div class="product-card">
           <div class="product-icon"><i class="fas fa-hotdog"></i></div>
           <h3>Булочка с <span class="censored-light">сосиской</span></h3>
           <p>Тёплое тесто и нечто внутри. <span class="censored-light">сосиска</span> — но это не точно.</p>
         </div>
-        <!-- 3. Кекс отчаяния (замена круассана) -->
         <div class="product-card">
           <div class="product-icon"><i class="fas fa-cake"></i></div>
           <h3>Кекс отчаяния</h3>
           <p>Сладкий лишь на первый укус. Послевкусие — пустота.</p>
         </div>
-        <!-- 4. Смерть -->
         <div class="product-card" style="border-left: 2px solid #3a3a3a;">
           <div class="product-icon"><i class="fas fa-skull"></i></div>
           <h3>Смерть</h3>
           <p><strong>Да, вы можете заказать смерть.</strong> Индивидуальный подход. Спросите у пекаря.</p>
         </div>
-        <!-- 5. Печенье забвения -->
         <div class="product-card">
           <div class="product-icon"><i class="fas fa-cookie"></i></div>
           <h3>Печенье забвения</h3>
@@ -478,7 +513,6 @@
     <p><i class="fas fa-cloud-moon"></i> Пекарня Весёлого Роджера — здесь кончается свет и начинается тесто <i class="fas fa-cloud-rain"></i></p>
     <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.5;">© ████ Все права утоплены. Никакой надежды, только выпечка. <span class="easter-egg">*вы тоже это видите?*</span></p>
   </div>
-  <!-- Ещё один ghost -->
   <div style="position: fixed; top: 30px; left: 20px; font-size: 12px; opacity: 0.05; color: #bbb; transform: rotate(2deg); pointer-events: none;">*вы тоже это видите?*</div>
 </footer>
 
